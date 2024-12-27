@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Actions, ITask } from '@twilio/flex-ui';
 import { Flex } from '@twilio-paste/core/flex';
 import { Tabs, TabList, Tab, TabPanels, TabPanel, useTabState } from '@twilio-paste/core/tabs';
+import { shouldShowTabs } from '../../config';
 
 export interface Props {
   thisTask?: ITask; // task assigned to component
@@ -71,24 +72,37 @@ export const TabbedCRMTask = ({ thisTask, task }: Props) => {
     };
   }, []);
 
-  return (
-    <div style={{ display, flex: '1 0 auto' }}>
-      <Tabs state={tabState} element="CRM_TABS">
-        <TabList aria-label="CRM tabs" element="CRM_TAB_LIST">
-          {customComponents &&
-            customComponents.map((component) => <Tab key={`crm-tab-${component.title}`}>{component.title}</Tab>)}
-        </TabList>
-        <TabPanels element="CRM_TAB_PANELS">
-          {customComponents &&
-            customComponents.map((component) => (
-              <TabPanel element="CRM_TAB_PANEL" key={`crm-tab-panel-${component.title}`}>
-                <Flex grow element="CRM_FLEX">
-                  {component.component}
-                </Flex>
-              </TabPanel>
-            ))}
-        </TabPanels>
-      </Tabs>
-    </div>
-  );
+  if (shouldShowTabs()) { 
+    return (
+      <div style={{ display, flex: '1 0 auto' }}>
+        <Tabs state={tabState} element="CRM_TABS">
+          <TabList aria-label="CRM tabs" element="CRM_TAB_LIST">
+            {customComponents &&
+              customComponents.map((component) => <Tab key={`crm-tab-${component.title}`}>{component.title}</Tab>)}
+          </TabList>
+          <TabPanels element="CRM_TAB_PANELS">
+            {customComponents &&
+              customComponents.map((component) => (
+                <TabPanel element="CRM_TAB_PANEL" key={`crm-tab-panel-${component.title}`}>
+                  <Flex grow element="CRM_FLEX">
+                    {component.component}
+                  </Flex>
+                </TabPanel>
+              ))}
+          </TabPanels>
+        </Tabs>
+      </div>
+    );
+  } else {
+    return (
+      <div style={{ display, flex: '1 0 auto' }}>
+        {customComponents &&
+          customComponents.map((component) => (
+              <Flex grow element="CRM_FLEX">
+                {component.component}
+              </Flex>
+          ))}
+      </div>
+    );
+  }  
 };
