@@ -17,7 +17,12 @@ export const IFrameCRMTab = ({ task }: Props) => {
     setIframeKey(Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER + 1)));
   };
 
-  const url = replaceStringAttributes(task ? getUrl() : displayUrlWhenNoTasks(), task);
+  let url = replaceStringAttributes(task ? getUrl() : displayUrlWhenNoTasks(), task);
+  if (url.indexOf('?') === -1) {
+    url = `${url}?token=${encodeURIComponent(window.Twilio.Flex.Manager.getInstance().user.token)}`;
+  } else {
+    url = `${url}&token=${encodeURIComponent(window.Twilio.Flex.Manager.getInstance().user.token)}`;
+  }
 
   return (
     <>
