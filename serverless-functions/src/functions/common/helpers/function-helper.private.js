@@ -4,6 +4,7 @@ const TokenValidator = require('twilio-flex-token-validator').functionValidator;
 const retryHandler = require(Runtime.getFunctions()['common/helpers/retry-handler'].path).retryHandler;
 
 const prepareFunction = (context, event, callback, requiredParameters, handlerFn) => {
+  console.log('Request= '+ event);
   const response = new Twilio.Response();
   const parameterError = module.exports.validateParameters(context.PATH, event, requiredParameters);
 
@@ -84,6 +85,7 @@ exports.validateParameters = (callingFunctionPath, parameterObject, requiredKeys
  * @param handlerFn             the Twilio Runtime handler function to execute
  */
 exports.prepareFlexFunction = (requiredParameters, handlerFn) => {
+  console.log('Flex Request');
   return TokenValidator((context, event, callback) =>
     prepareFunction(context, event, callback, requiredParameters, handlerFn),
   );
