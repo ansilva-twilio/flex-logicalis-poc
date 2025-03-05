@@ -18,6 +18,7 @@ export const IFrameCRMTab = ({ task }: Props) => {
   };
 
   let url = replaceStringAttributes(task ? getUrl() : displayUrlWhenNoTasks(), task);
+  console.log('URL= ', url);
   if (url.indexOf('?') === -1) {
     url = `${url}?token=${encodeURIComponent(window.Twilio.Flex.Manager.getInstance().user.token)}`;
   } else {

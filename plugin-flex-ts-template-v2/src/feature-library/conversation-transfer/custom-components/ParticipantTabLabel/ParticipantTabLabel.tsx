@@ -13,7 +13,7 @@ export const ParticipantTabLabelContainer = () => {
         return (
           <Stack orientation="horizontal" spacing="space20">
             <Template source={templates[StringTemplates.Participants]} />
-            <Badge as="span" variant="info">
+            <Badge as="span" variant="info" element='PARTICIPANTS_BADGE' style={{ padding: '0rem 0.5rem'}}>
               {participantCount}
             </Badge>
           </Stack>

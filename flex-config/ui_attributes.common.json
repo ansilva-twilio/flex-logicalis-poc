@@ -426,6 +426,12 @@
       },
       "screen_recording": {
         "enabled": false
+      },
+      "whatsapp_sender": {
+        "enabled": false
+      },
+      "snow_return_task": {
+        "enabled": false
       }
     }
   }

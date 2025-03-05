@@ -95,10 +95,10 @@ export const TabbedCRMTask = ({ thisTask, task }: Props) => {
     );
   } else {
     return (
-      <div style={{ display, flex: '1 0 auto' }}>
+      <div key='shouldnt-show-tabs' style={{ display, flex: '1 0 auto' }}>
         {customComponents &&
           customComponents.map((component) => (
-              <Flex grow element="CRM_FLEX">
+              <Flex key={`crm-flex-notabs-${component.title}`} grow element="CRM_FLEX">
                 {component.component}
               </Flex>
           ))}
