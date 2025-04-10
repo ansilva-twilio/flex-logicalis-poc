@@ -19,7 +19,7 @@ const extractConfigFromContext = (context, params) => {
   return config;
 };
 
-const get = async (context, table, query, fields, limit) => {
+const get = async (context, table, query, fields, limit, displayValue = true) => {
   const serviceNowUrl = context.SERVICENOW_URL;
   const url = `${serviceNowUrl}/api/now/table/${table}`;
   
@@ -27,6 +27,7 @@ const get = async (context, table, query, fields, limit) => {
   if (query)  params.sysparm_query  = query;
   if (fields) params.sysparm_fields = fields;
   if (limit) params.sysparm_limit = limit;
+  if (displayValue) params.sysparm_display_value = displayValue;
 
   try {
     const response = await axios.get(url, extractConfigFromContext(context, params));

@@ -9,7 +9,7 @@ const requiredParameters = [
   
 exports.handler = prepareFlexFunction(requiredParameters, async (context, event, callback, response, handleError) => {
     try {
-        const result = await ServiceNowAPI.get(context, event.table, event.query, event.fields, event.limit);
+        const result = await ServiceNowAPI.get(context, event.table, event.query, event.fields, event.limit, event.displayValue ?? true);
         const { data, status } = result;
 
         response.setStatusCode(status);
